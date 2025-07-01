@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserAuthApp.Models
 {
@@ -13,7 +14,11 @@ namespace UserAuthApp.Models
         [Required(ErrorMessage = "Şifre gereklidir.")]
         [MinLength(6, ErrorMessage = "Şifre en az 6 karakter olmalıdır.")]
         public string PasswordHash { get; set; }
-
         public string Role { get; set; } = "User";
+
+        [NotMapped]
+        public string? NewPassword { get; set; }
+
     }
+
 }

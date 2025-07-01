@@ -74,6 +74,45 @@ namespace UserAuthApp.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
+        // GET: Şifre Güncelleme Sayfası
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            var email = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(email))
+                return RedirectToAction("Login");
+
+            return View();
+        }
+
+        // POST: Şifre Güncelleme İşlemi
+        [HttpPost]
+        public IActionResult ChangePassword(string currentPassword, string newPassword)
+        {
+            var email = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(email))
+                return RedirectToAction("Login");
+
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null) return NotFound();
+
+            using var sha256 = SHA256.Create();
+            var currentHash = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(currentPassword)));
+
+            if (user.PasswordHash != currentHash)
+            {
+                ViewBag.Message = "Mevcut şifre yanlış.";
+                return View();
+            }
+
+            var newHash = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(newPassword)));
+            user.PasswordHash = newHash;
+            _context.SaveChanges();
+
+            ViewBag.Message = "Şifre başarıyla güncellendi.";
+            return View();
+        }
+
     }
 }
 
