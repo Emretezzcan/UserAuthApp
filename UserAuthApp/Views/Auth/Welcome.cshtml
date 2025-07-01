@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Hoş Geldiniz";
+}
+
+<h2>Hoş geldin, @ViewBag.Email</h2>
+<p>Sisteme başarıyla giriş yaptınız!</p>
+
+<p>
+    <a asp-controller="Task" asp-action="Index" class="btn btn-primary">📋 Görevlerim</a>
+</p>
+
+<p>
+    <a asp-controller="Auth" asp-action="Logout" class="btn btn-danger">🚪 Çıkış Yap</a>
+</p>
