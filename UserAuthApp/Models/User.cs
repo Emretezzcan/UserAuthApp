@@ -6,7 +6,7 @@ namespace UserAuthApp.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "E-posta gereklidir.")]
+        [Required(ErrorMessage = "E-posta  gereklidir.")]
         [EmailAddress(ErrorMessage = "Geçerli bir e-posta girin.")]
         public string Email { get; set; }
 
