@@ -112,6 +112,15 @@ namespace UserAuthApp.Controllers
             ViewBag.Message = "Şifre başarıyla güncellendi.";
             return View();
         }
+        public IActionResult Profile()
+        {
+            var email = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(email))
+                return RedirectToAction("Login");
+
+            ViewBag.Email = email;
+            return View();
+        }
 
     }
 }

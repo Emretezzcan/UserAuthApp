@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Profilim";
+}
+
+<h2>👤 Profilim</h2>
+
+<div class="card p-4 w-50 shadow rounded">
+    <p><strong>📧 E-posta:</strong> @ViewBag.Email</p>
+
+    <a asp-action="ChangePassword" class="btn btn-warning">🔐 Şifre Değiştir</a>
+</div>
+
+<p class="mt-3">
+    <a asp-controller="Task" asp-action="Index" class="btn btn-secondary">⬅️ Görevlerime Dön</a>
+</p>
