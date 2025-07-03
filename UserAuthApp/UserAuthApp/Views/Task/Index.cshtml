@@ -1,0 +1,75 @@
+﻿@model List<UserAuthApp.Models.TaskItem>
+<div class="alert alert-info d-flex justify-content-between">
+    <span>📋 Toplam Görev: <strong>@ViewBag.TotalTasks</strong></span>
+    <span>✅ Tamamlanan: <strong>@ViewBag.CompletedTasks</strong></span>
+    <span>⏰ Geciken: <strong>@ViewBag.OverdueTasks</strong></span>
+</div>
+
+
+@{
+    ViewData["Title"] = "Görevlerim";
+    string currentFilter = ViewBag.CurrentFilter ?? "all";
+    string currentSearch = ViewBag.CurrentSearch ?? "";
+}
+<h2>Görevlerim</h2>
+
+<!-- 🔍 Arama ve Filtre -->
+<form asp-action="Index" method="get" class="d-flex mb-3">
+    <input type="text" name="search" value="@currentSearch" placeholder="Görev ara..." class="form-control me-2" />
+    <input type="hidden" name="filter" value="@currentFilter" />
+    <button type="submit" class="btn btn-outline-primary">🔍 Ara</button>
+</form>
+
+<!--  Filtre Butonları -->
+<div class="btn-group mb-3">
+    <a asp-action="Index" asp-route-filter="all" class="btn @(currentFilter == "all" ? "btn-primary" : "btn-outline-primary")">Tümü</a>
+    <a asp-action="Index" asp-route-filter="completed" class="btn @(currentFilter == "completed" ? "btn-primary" : "btn-outline-primary")">Tamamlanan</a>
+    <a asp-action="Index" asp-route-filter="incomplete" class="btn @(currentFilter == "incomplete" ? "btn-primary" : "btn-outline-primary")">Devam Eden</a>
+</div>
+
+<!-- Görev Ekleme Formu -->
+<form asp-action="Add" method="post" class="mb-3">
+    <input type="text" name="title" placeholder="Yeni görev" required class="form-control mb-2" />
+    <label for="dueDate">Bitiş Tarihi:</label>
+    <input type="date" name="dueDate" class="form-control mb-2" />
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>
+
+<!-- Görev Listesi -->
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Görev</th>
+            <th>Durum</th>
+            <th>Oluşturulma</th>
+            <th>Bitiş</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr class="@(task.IsDueSoon ? "table-danger" : "")">
+                <td>
+                    @task.Title
+                    @if (task.IsDueSoon)
+                    {
+                        <span class="badge bg-danger ms-2">⏰ Yaklaşıyor</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Toggle" asp-route-id="@task.Id">
+                        @(task.IsCompleted ? "✅ Tamamlandı" : "⏳ Devam")
+                    </a>
+                </td>
+                <td>@task.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@(task.DueDate?.ToString("dd.MM.yyyy") ?? "-")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-warning btn-sm">✏️ Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-danger btn-sm">🗑 Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
