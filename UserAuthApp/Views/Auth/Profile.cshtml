@@ -2,14 +2,29 @@
     ViewData["Title"] = "Profilim";
 }
 
-<h2>👤 Profilim</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-<div class="card p-4 w-50 shadow rounded">
-    <p><strong>📧 E-posta:</strong> @ViewBag.Email</p>
+            <div class="card shadow p-4">
+                <h2 class="text-center mb-4">👤 Profil Bilgileri</h2>
 
-    <a asp-action="ChangePassword" class="btn btn-warning">🔐 Şifre Değiştir</a>
+                <div class="mb-3">
+                    <label class="form-label"><strong>👤 Kullanıcı Adı:</strong></label>
+                    <div class="form-control bg-light">@ViewBag.Name</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label"><strong>📧 E-posta:</strong></label>
+                    <div class="form-control bg-light">@ViewBag.Email</div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <a asp-action="ChangePassword" class="btn btn-warning">🔐 Şifre Değiştir</a>
+                    <a asp-controller="Task" asp-action="Index" class="btn btn-secondary">⬅️ Görevlerime Dön</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
-
-<p class="mt-3">
-    <a asp-controller="Task" asp-action="Index" class="btn btn-secondary">⬅️ Görevlerime Dön</a>
-</p>

@@ -117,8 +117,13 @@ namespace UserAuthApp.Controllers
             var email = HttpContext.Session.GetString("UserEmail");
             if (string.IsNullOrEmpty(email))
                 return RedirectToAction("Login");
+           
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null) return NotFound();
+
 
             ViewBag.Email = email;
+            ViewBag.Name = user.Name;
             return View();
         }
 

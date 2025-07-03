@@ -19,6 +19,9 @@ namespace UserAuthApp.Models
         [NotMapped]
         public string? NewPassword { get; set; }
 
+        public string Name { get; set; } // Kullanıcı adı
+
+
     }
 
 }
