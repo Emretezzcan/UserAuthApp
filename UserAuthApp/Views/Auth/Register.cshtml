@@ -3,44 +3,52 @@
     ViewData["Title"] = "Kayıt Ol";
 }
 
-<h2>Kayıt Ol</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h2 class="text-center mb-4">📝 Kayıt Ol</h2>
 
-<form asp-action="Register" method="post" class="w-50">
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label">Adınız</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+                <form asp-action="Register" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">👤 Adınız</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="PasswordHash" class="form-label">Şifre</label>
-        <input asp-for="PasswordHash" type="password" class="form-control" id="registerPassword" />
-        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label">📧 Email</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
 
-        <div class="form-check mt-1">
-            <input type="checkbox" class="form-check-input" id="showPasswordCheck" />
-            <label class="form-check-label" for="showPasswordCheck">Şifreyi Göster</label>
+                    <div class="mb-3">
+                        <label asp-for="PasswordHash" class="form-label">🔒 Şifre</label>
+                        <input asp-for="PasswordHash" type="password" id="password" class="form-control" />
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+
+                        <div class="form-check mt-1">
+                            <input class="form-check-input" type="checkbox" id="showPassword" />
+                            <label class="form-check-label" for="showPassword">Şifreyi Göster</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Kayıt Ol</button>
+                </form>
+
+                <hr />
+                <p class="text-center">Zaten hesabın var mı? <a asp-controller="Auth" asp-action="Login">Giriş Yap</a></p>
+            </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Kayıt Ol</button>
-</form>
-
-<div class="mt-3">
-    Zaten hesabınız var mı? <a asp-controller="Auth" asp-action="Login">Giriş yap</a>
 </div>
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-
+    <partial name="_ValidationScriptsPartial" />
     <script>
-        document.getElementById("showPasswordCheck").addEventListener("change", function () {
-            var input = document.getElementById("registerPassword");
-            input.type = this.checked ? "text" : "password";
+        document.getElementById("showPassword").addEventListener("change", function () {
+            var passwordInput = document.getElementById("password");
+            passwordInput.type = this.checked ? "text" : "password";
         });
     </script>
 }

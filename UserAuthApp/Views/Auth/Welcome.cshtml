@@ -2,20 +2,22 @@
     ViewData["Title"] = "Hoş Geldiniz";
 }
 
-<h2>Hoş geldin, @ViewBag.Email</h2>
-<p>Sisteme başarıyla giriş yaptınız!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-<p>
-    <a asp-controller="Task" asp-action="Index" class="btn btn-primary">📋 Görevlerim</a>
-</p>
+            <div class="card shadow p-4 text-center">
+                <h2 class="mb-3">🎉 Hoş geldin, <span class="text-primary">@ViewBag.Email</span></h2>
+                <p class="mb-4">Sisteme başarıyla giriş yaptınız!</p>
 
-<p>
-    <a asp-controller="Auth" asp-action="ChangePassword" class="btn btn-warning">🔑 Şifreyi Güncelle</a>
-</p>
+                <div class="d-grid gap-3">
+                    <a asp-controller="Task" asp-action="Index" class="btn btn-primary btn-lg">📋 Görevlerim</a>
+                    <a asp-controller="Auth" asp-action="Profile" class="btn btn-info btn-lg">👤 Profilim</a>
+                    <a asp-controller="Auth" asp-action="ChangePassword" class="btn btn-warning btn-lg">🔐 Şifreyi Güncelle</a>
+                    <a asp-controller="Auth" asp-action="Logout" class="btn btn-danger btn-lg">🚪 Çıkış Yap</a>
+                </div>
+            </div>
 
-<p>
-    <a asp-controller="Auth" asp-action="Logout" class="btn btn-danger">🚪 Çıkış Yap</a>
-</p>
-<p>
-    <a asp-action="Profile" asp-controller="Auth" class="btn btn-info">👤 Profilim</a>
-</p>
+        </div>
+    </div>
+</div>

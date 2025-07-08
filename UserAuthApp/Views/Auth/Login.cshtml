@@ -2,39 +2,49 @@
     ViewData["Title"] = "Giriş Yap";
 }
 
-<h2>Giriş Yap</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
 
-@if (ViewBag.Error != null)
-{
-    <p style="color:red;">@ViewBag.Error</p>
-}
+            <div class="card shadow p-4">
+                <h2 class="text-center mb-4">🔐 Giriş Yap</h2>
 
-<form asp-action="Login" method="post">
-    <div>
-        <label>Email</label><br />
-        <input type="email" name="email" required />
-    </div>
-    <div>
-        <label>Şifre</label><br />
-        <input type="password" name="password" id="password" required />
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Error</div>
+                }
 
-        <div>
-            <input type="checkbox" id="showPassword" />
-            <label for="showPassword">Şifreyi Göster</label>
+                <form asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">📧 Email</label>
+                        <input type="email" name="email" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">🔒 Şifre</label>
+                        <input type="password" name="password" id="password" class="form-control" required />
+                        <div class="form-check mt-1">
+                            <input class="form-check-input" type="checkbox" id="showPassword" />
+                            <label class="form-check-label" for="showPassword">Şifreyi Göster</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+                </form>
+
+                <hr />
+
+                <p class="text-center">Hesabın yok mu? <a asp-action="Register" asp-controller="Auth">Kayıt Ol</a></p>
+            </div>
         </div>
     </div>
+</div>
 
-    <button type="submit">Giriş Yap</button>
-</form>
-
-<hr />
-
-<p>Hesabın yok mu?</p>
-<a asp-action="Register" asp-controller="Auth">Kayıt Ol</a>
-
-<script>
-    document.getElementById("showPassword").addEventListener("change", function () {
-        var passwordInput = document.getElementById("password");
-        passwordInput.type = this.checked ? "text" : "password";
-    });
-</script>
+@section Scripts {
+    <script>
+        document.getElementById("showPassword").addEventListener("change", function () {
+            var passwordInput = document.getElementById("password");
+            passwordInput.type = this.checked ? "text" : "password";
+        });
+    </script>
+}
