@@ -7,21 +7,26 @@ namespace UserAuthApp.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "E-posta  gereklidir.")]
-        [EmailAddress(ErrorMessage = "Geçerli bir e-posta girin.")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "E‑posta gereklidir.")]
+        [EmailAddress(ErrorMessage = "Geçerli bir e‑posta girin.")]
+        public string Email { get; set; } = string.Empty;
 
+     
+        [NotMapped]
         [Required(ErrorMessage = "Şifre gereklidir.")]
         [MinLength(6, ErrorMessage = "Şifre en az 6 karakter olmalıdır.")]
-        public string PasswordHash { get; set; }
+        public string Password { get; set; } = string.Empty;
+
+   
+        public string PasswordHash { get; set; } = string.Empty;
+
         public string Role { get; set; } = "User";
 
+       
         [NotMapped]
         public string? NewPassword { get; set; }
 
-        public string Name { get; set; } // Kullanıcı adı
-
-
+        [Required(ErrorMessage = "İsim gereklidir.")]
+        public string Name { get; set; } = string.Empty;
     }
-
 }
