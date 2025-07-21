@@ -5,9 +5,9 @@ namespace UserAuthApp.Models
     public class TaskItem
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        public required string Title { get; set; }
         public bool IsCompleted { get; set; }
-        public string UserEmail { get; set; }
+        public required string UserEmail { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? DueDate { get; set; }
